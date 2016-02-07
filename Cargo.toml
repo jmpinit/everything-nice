@@ -3,5 +3,8 @@ name = "everything-nice"
 version = "0.1.0"
 authors = ["Owen Trueblood <owen@owentrueblood.me>"]
 
+[lib]
+crate-type = ["dylib"]
+
 [dependencies]
 libc = "0.2.0"

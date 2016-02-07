@@ -50,17 +50,29 @@ extern fn sendStat() {
 extern fn sendStat() {
 }*/
 
-fn spiceit(cmd: &CString) {
-    unsafe {
-        ngSpice_Command(cmd.as_ptr());
-    }
+#[no_mangle]
+pub extern fn spice_init() {
+    unsafe { ngSpice_Init(send_char, 0, controlled_exit, 0, 0, 0); }
 }
 
-fn main() {
+#[no_mangle]
+pub extern fn add_one(a: i32) -> i32 { a + 1 }
+
+#[no_mangle]
+pub extern fn spiceit(cmd: &str) {
+    /*let s = &CString::new(cmd).unwrap();
+
+    unsafe {
+        ngSpice_Command(s.as_ptr());
+    }*/
+    println!("SPICED!");
+}
+
+/*fn main() {
     unsafe { ngSpice_Init(send_char, 0, controlled_exit, 0, 0, 0); }
 
     let stdin = io::stdin();
     for line in stdin.lock().lines() {
         spiceit(&CString::new(line.unwrap()).unwrap());
     }
-}
+}*/
